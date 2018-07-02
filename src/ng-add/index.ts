@@ -1,4 +1,5 @@
-import { chain, Rule, Tree } from '@angular-devkit/schematics';
+import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { addPackageJsonDependency, NodeDependencyType } from '../utilities/dependencies';
 
 function addCypressToPackageJson() {
@@ -12,6 +13,13 @@ function addCypressToPackageJson() {
   };
 }
 
+function installPackages() {
+  return (tree: Tree, context: SchematicContext) => {
+    context.addTask(new NodePackageInstallTask());
+    return tree;
+  };
+}
+
 export default function ngAdd(): Rule {
-  return chain([addCypressToPackageJson()]);
+  return chain([addCypressToPackageJson(), installPackages()]);
 }
