@@ -21,7 +21,7 @@ function installPackages() {
   };
 }
 
-function createCypressFolder() {
+function createCypressFolderAndFiles() {
   return (tree: Tree, context: SchematicContext) => {
     const targetFileName = '/cypress/plugins/index.js';
     const basicPluginsFile = url('./files')(context) as Tree;
@@ -34,5 +34,5 @@ function createCypressFolder() {
 }
 
 export default function ngAdd(): Rule {
-  return chain([addCypressToPackageJson(), installPackages(), createCypressFolder()]);
+  return chain([addCypressToPackageJson(), installPackages(), createCypressFolderAndFiles()]);
 }
