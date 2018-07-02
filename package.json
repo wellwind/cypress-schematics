@@ -1,7 +1,7 @@
 {
   "name": "cypress-schematics",
-  "version": "0.0.0",
-  "description": "A schematics",
+  "version": "0.0.1",
+  "description": "Code generator for Cypress.io",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && jasmine **/*_spec.js"
@@ -9,12 +9,13 @@
   "keywords": [
     "schematics"
   ],
-  "author": "",
+  "author": "Wellwind<wellwind@gmail.com>",
   "license": "MIT",
   "schematics": "./src/collection.json",
   "dependencies": {
     "@angular-devkit/core": "^0.3.1",
     "@angular-devkit/schematics": "^0.3.1",
+    "@schematics/angular": "^0.6.8",
     "@types/jasmine": "^2.6.0",
     "@types/node": "^8.0.31",
     "jasmine": "^2.8.0",
