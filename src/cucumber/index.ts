@@ -6,11 +6,11 @@ import { addPackageJson, installPackages } from '../utilities/packages';
 
 export default function typescript(): Rule {
   return chain([
-    addPackageJson('@bahmutov/add-typescript-to-cypress'),
+    addPackageJson('cypress-cucumber-preprocessor'),
     installPackages(),
     addPluginToCypress(
-      `const cypressTypeScriptPreprocessor = require('./cy-ts-preprocessor')`,
-      `on('file:preprocessor', cypressTypeScriptPreprocessor)`
+      `const cucumber = require('cypress-cucumber-preprocessor').default`,
+      `on('file:preprocessor', cucumber())`
     ),
     moveFolderFiles('./files', '/cypress')
   ]);

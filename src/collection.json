@@ -9,6 +9,10 @@
       "description": "Add typescript support to cypress",
       "factory": "./typescript"
     },
+    "cucumber": {
+      "description": "Add cucumber support to cypress",
+      "factory": "./cucumber"
+    },
     "my-schematic": {
       "description": "An example schematic",
       "factory": "./my-schematic/index#mySchematic"
