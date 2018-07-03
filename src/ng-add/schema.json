@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "ng-add",
+  "title": "Add cypress",
+  "type": "object",
+  "properties": {
+    "typescript": {
+      "type": "boolean",
+      "description": "Add typescript support",
+      "default": true
+    },
+    "cucumber": {
+      "type": "boolean",
+      "description": "Add cucumber support",
+      "default": false
+    }
+  }
+}
