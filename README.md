@@ -1,28 +1,62 @@
-# Getting Started With Schematics
+# Cypress Schematics
 
-This repository is a basic Schematic implementation that serves as a starting point to create and publish Schematics to NPM.
+A schematics collection for installing [Cypress.io](https://www.cypress.io/)
 
-### Testing
+This library is designed for Angular CLI project, however, you still can use this for any project you want to run e2e teseting.
 
-To test locally, install `@angular-devkit/schematics` globally and use the `schematics` command line tool. That tool acts the same as the `generate` command of the Angular CLI, but also has a debug mode.
+## Using Angular CLI
 
-Check the documentation with
-```bash
-schematics --help
-```
+### Requirements
 
-### Unit Testing
+Angular CLI 6.0.0+
 
-`npm run test` will run the unit tests, using Jasmine as a runner and test framework.
+### Usage
 
-### Publishing
+Just run the `ng add` command:
 
-To publish, simply do:
+`ng add cypress-schematics`
 
-```bash
-npm run build
-npm publish
-```
+You can also enable typescript and cucumber support by add following parameters.
 
-That's it!
- 
+- `--typescript`: Add typescript support .
+- `--cucumber`: Add cucumber support.
+
+If you don't enable typescript or cucumber support when `ng add`, you can still enable them after.
+
+To enable typescript support:
+
+`ng g cypress-schematics:typescript`
+
+To enable cypress support:
+
+`ng g cypress-schematics:cucumber`
+
+## Without Angular CLI
+
+### Requirements
+
+Install `@angular-devkit/schematics-cli`
+
+`npm i -g @angular-devkit/schematics-cli`
+
+And install `cypress-schematics` in the folder you want to add cypress:
+
+`npm i cypress-schematics`
+
+### Usage
+
+You can use schematics-cli to add cypress to any your project.
+
+`schematics cypress-schematics:ng-add`
+
+Also, just add `--typescript` or `--cucumber` to add another supports.
+
+If you want to enable them later, you can still using schematics-cli.
+
+To enable typescript support:
+
+`schematics cypress-schematics:typescript`
+
+To enable cypress support:
+
+`schematics cypress-schematics:cucumber`
