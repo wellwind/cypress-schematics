@@ -1,0 +1,14 @@
+language: node_js
+sudo: true
+dist: trusty
+
+
+node_js:
+  - "8.11.1"
+
+deploy:
+  provider: npm
+  skip_cleanup: true
+  email: wellwind@gmail.com
+  api_key: $NPM_API_KEY
+  on: master
