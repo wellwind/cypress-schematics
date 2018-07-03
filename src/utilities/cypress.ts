@@ -5,7 +5,7 @@ export function addPluginToCypress(requireStatement: string, mainStatement: stri
   return (tree: Tree) => {
     const tragetFilePath = '/cypress/plugins/index.js';
     if (!tree.exists(tragetFilePath)) {
-      throw new SchematicsException(`The plugin configuration file not exists. (${tragetFilePath})`);
+      throw new SchematicsException(`The plugin configuration file not exists. '${tragetFilePath}'`);
     }
 
     const fileContent = tree.read(tragetFilePath)!.toString('utf-8');
