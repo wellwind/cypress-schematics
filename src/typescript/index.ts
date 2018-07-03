@@ -1,5 +1,6 @@
-import { apply, branchAndMerge, chain, mergeWith, move, Rule, Tree, url } from '@angular-devkit/schematics';
+import { chain, Rule, Tree } from '@angular-devkit/schematics';
 
+import { moveFolderFiles } from '../utilities/files';
 import { addPackageJson, installPackages } from '../utilities/packages';
 
 function addTypescriptSupport() {
@@ -20,16 +21,11 @@ function addTypescriptSupport() {
   };
 }
 
-function addTsConfigJson() {
-  const templateSource = apply(url('./files'), [move('/cypress')]);
-  return branchAndMerge(mergeWith(templateSource));
-}
-
 export default function typescript(): Rule {
   return chain([
     addPackageJson('@bahmutov/add-typescript-to-cypress'),
     installPackages(),
     addTypescriptSupport(),
-    addTsConfigJson()
+    moveFolderFiles('./files', '/cypress')
   ]);
 }
