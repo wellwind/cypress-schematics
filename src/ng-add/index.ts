@@ -1,26 +1,19 @@
-import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
-import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
+import { chain, noop, Rule } from '@angular-devkit/schematics';
 
-import { addPackageJsonDependency, NodeDependencyType } from '../utilities/dependencies';
+import { cucumberSteps } from '../cucumber';
+import { typescriptSteps } from '../typescript';
+import { moveFolderFiles } from '../utilities/files';
+import { addPackageJson, installPackages } from '../utilities/packages';
 
-function addCypressToPackageJson() {
-  return (tree: Tree) => {
-    addPackageJsonDependency(tree, {
-      type: NodeDependencyType.Dev,
-      name: 'cypress',
-      version: '*'
-    });
-    return tree;
-  };
+interface NgAddOptions {
+  typescript: boolean | 'false';
+  cucumber: boolean | 'false';
 }
 
-function installPackages() {
-  return (tree: Tree, context: SchematicContext) => {
-    context.addTask(new NodePackageInstallTask());
-    return tree;
-  };
-}
+const defaultSteps = [addPackageJson('cypress'), installPackages(), moveFolderFiles(__dirname + '/files', '/cypress')];
 
-export default function ngAdd(): Rule {
-  return chain([addCypressToPackageJson(), installPackages()]);
+export default function ngAdd(options: NgAddOptions): Rule {
+  const typescriptSupportSteps = options.typescript && options.typescript !== 'false' ? typescriptSteps() : [noop()];
+  const cucumberSupportSteps = options.cucumber && options.cucumber !== 'false' ? cucumberSteps() : [noop()];
+  return chain([...defaultSteps, ...typescriptSupportSteps, ...cucumberSupportSteps]);
 }
